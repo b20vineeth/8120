@@ -18,6 +18,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		<property name="user" value="root" />
 		<property name="password" value="" />
 
+
 		<property name="minPoolSize" value="20" />
 		<property name="maxPoolSize" value="60" />
 		<property name="acquireIncrement" value="6" />
