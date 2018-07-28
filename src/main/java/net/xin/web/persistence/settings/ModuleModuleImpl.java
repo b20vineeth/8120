@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.xin.web.vo.UserSetup;
+import net.xin.web.form.settings.UserSetupForm;
+import net.xin.web.vo.settings.Module;
  
 
 @Component
@@ -17,7 +18,7 @@ public class ModuleModuleImpl implements ModuleDao {
 
 	@Override
 	public String save() {
-		UserSetup user=new UserSetup();
+		UserSetupForm user=new UserSetupForm();
 		user.setUserName("BBhh");
 		session.saveOrUpdate(user);
 		return  "";
@@ -27,6 +28,12 @@ public class ModuleModuleImpl implements ModuleDao {
 	public void transaction(Session session) {
 		 
 		this.session=session;
+	}
+
+	@Override
+	public Module moduleSave(Module moduleVo) {
+		session.saveOrUpdate(moduleVo);
+		return moduleVo;
 	}
 
 }

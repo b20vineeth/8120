@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.xin.web.dao.WebDao;
-import com.xin.web.utility.resource.Util;
-import com.xin.web.utility.userManage.UserBean;
 
+import net.xin.web.form.settings.ModuleForm;
+import net.xin.web.packages.framework.UserBean;
+import net.xin.web.packages.framework.ValidationForm;
 import net.xin.web.service.settings.ModuleService;
 
 @Controller
 public class ModuleController   {
-	
+
 	@Autowired
 	protected ModuleService service;
 
@@ -30,15 +30,83 @@ public class ModuleController   {
 	protected HttpServletRequest request;
 	@Autowired
 	protected HttpSession session;
-	@RequestMapping("/module")
-	public String  indexHandler(ModelMap modelMap) 
+	@RequestMapping("/module.save")
+	public String  moduleSave(ModelMap modelMap) 
 	{
-		
-		String data=service.save();
+		UserBean user =new UserBean();
+		String data=null;
+		if(user.getUserSetup()!=null)
+		{
+			ModuleForm module=new ModuleForm();
+
+			ValidationForm	form=service.moduleSave(module,user);
+			 
+		}
+		else
+		{
+			data="AF";
+		}
 		return data; 
-		 
-		 
 
 	}
+	
+	@RequestMapping("/module.edit")
+	public String  moduleEdit(ModelMap modelMap) 
+	{
+		UserBean user =new UserBean();
+		String data=null;
+		if(user.getUserSetup()!=null)
+		{
+			ModuleForm module=new ModuleForm();
+
+			ValidationForm	form=service.moduleSave(module,user);
+			 
+		}
+		else
+		{
+			data="AF";
+		}
+		return data; 
+
+	}
+	@RequestMapping("/module.List")
+	public String  moduleList(ModelMap modelMap) 
+	{
+		UserBean user =new UserBean();
+		String data=null;
+		if(user.getUserSetup()!=null)
+		{
+			ModuleForm module=new ModuleForm();
+
+			ValidationForm	form=service.moduleSave(module,user);
+			 
+		}
+		else
+		{
+			data="AF";
+		}
+		return data; 
+
+	}
+	@RequestMapping("/module.get")
+	public String  moduleGet(ModelMap modelMap) 
+	{
+		UserBean user =new UserBean();
+		String data=null;
+		if(user.getUserSetup()!=null)
+		{
+			ModuleForm module=new ModuleForm();
+
+			ValidationForm	form=service.moduleSave(module,user);
+			 
+		}
+		else
+		{
+			data="AF";
+		}
+		return data; 
+
+	}
+
 
 }

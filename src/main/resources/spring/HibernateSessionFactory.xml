@@ -21,14 +21,9 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.xin.web.vo.UserSetup</value>
-				<value>com.xin.web.vo.Category</value>
-				<value>com.xin.web.vo.Menu</value>
-				<value>com.xin.web.vo.MenuPrivilege</value>
-				<value>com.xin.web.vo.ItemPrivilegeLabel</value>
-				<value>com.xin.web.vo.ItemPrivilege</value>
-				<value>com.xin.web.vo.PasswordReset</value>
-				<value>com.xin.web.vo.GalleryTemp</value>
+				<value>net.xin.web.vo.settings.UserSetup</value>
+				<value>net.xin.web.vo.settings.Module</value>
+				 
 			</list>
 		</property>
 		<property name="mappingResources">

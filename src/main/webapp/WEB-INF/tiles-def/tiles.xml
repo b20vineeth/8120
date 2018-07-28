@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="admin.basic" template="/WEB-INF/jsp/Admin-home.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/Admin-header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/jsp/Admin-menu.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/Welcome.jsp" />
+         <put-attribute name="footer" value="/WEB-INF/jsp/Admin-footer.jsp" />
+    </definition>
+
+    <definition name="admin.slideShow" extends="admin.basic">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/SlideShow.jsp" />
+    </definition>
+    <definition name="admin.running" extends="admin.basic">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/Running.jsp" />
+    </definition>
+    <definition name="admin.upComming" extends="admin.basic">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/UpComming.jsp" />
+    </definition>
+    <definition name="admin.cinema" extends="admin.basic">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/Cinema.jsp" />
+    </definition>
+    
+    
+    
+    <definition name="admin.video" extends="admin.basic">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/Video.jsp" />
+    </definition>
+    
+    
+    <definition name="admin.gallery" extends="admin.basic">
+        <put-attribute name="body" value="/WEB-INF/jsp/admin/Gallery.jsp" />
+    </definition>
+    
+    
+     
+
+
+</tiles-definitions>
