@@ -99,11 +99,15 @@ public class ModuleAppImpl implements ModuleApp {
 						if(moduleVo.getUser().getUserId().equals(user.getUserSetup().getUserId()))
 							throw new PrevilegeException("module-Update");  
 						else
+						{
+							this.rollback();
 							throw new PrevilegeException("module-UpdateAll");  
+						}
 					}
 				}
 				else
 				{
+					this.rollback();
 					throw new PrevilegeException("module-Update");  
 				}
 
@@ -117,6 +121,7 @@ public class ModuleAppImpl implements ModuleApp {
 				}
 				else
 				{
+					this.rollback();
 					throw new PrevilegeException("module-CreateNew");  
 
 				}
@@ -132,21 +137,20 @@ public class ModuleAppImpl implements ModuleApp {
 		}
 		catch (ConstraintViolationException  ex)
 		{
-			tx.rollback();
+
 			String exceptionCode="IN";
 			if(!new UniqueValidation(session).isUnique(module.getModuleCode(), "module_code", "module"))
 			{
 				exceptionCode="ModuleCode-D";
 			}
-			session.close();
+			this.rollback();
 
 			throw new BusinessViolatonException(exceptionCode);  
 
 
 		}
 		catch (Exception e) {
-			tx.rollback();
-			session.close();
+			this.rollback();
 
 			throw new BussinessException("Failed - "+e.getMessage());  
 		}
@@ -157,7 +161,7 @@ public class ModuleAppImpl implements ModuleApp {
 
 
 	@Override
-	public ValidationForm moduleList(String id, UserBean user) throws BussinessException {
+	public ValidationForm moduleGetById(String id, UserBean user) throws BussinessException ,PrevilegeException{
 
 		ValidationForm form= new ValidationForm();
 		try 
@@ -167,12 +171,44 @@ public class ModuleAppImpl implements ModuleApp {
 			moduledao.transaction(session);
 			Module moduleVo=new Module();
 			ModuleForm module=null;
+
+			previlege=new PrivilegeValidation();
+
+			previlege.setKey("Previlege.module.CreateNew,"
+					+ "Previlege.module.UpdateAll,"
+					+ "Previlege.module.Update");
+			previlege.setUserGroupId(1);
+			previlege=new Previlege(this.session).fetch(previlege);
+
+
 			if(id!=null && 
 					id.trim().length()>0)
 			{ 
-				moduleVo=moduledao.find(id);
-				if(moduleVo!=null)
-					module=new BeanCopy().copyModuleFormToModule(moduleVo); 
+				if(previlege.getPrivilege().get("Previlege.module.ListAll").equals("Y") ||  
+						previlege.getPrivilege().get("Previlege.module.List").equals("Y") ) 
+				{
+					moduleVo=moduledao.find(id);
+					if(moduleVo!=null)
+					{ 
+						if(previlege.getPrivilege().get("Previlege.module.ListAll").equals("Y") ||
+								(moduleVo.getUser().getUserId().equals(user.getUserSetup().getUserId())
+										&& previlege.getPrivilege().get("Previlege.module.List").equals("Y") )   )
+						{
+							module=new BeanCopy().copyModuleFormToModule(moduleVo); 
+						}
+						else
+						{
+							this.rollback();	
+							throw new PrevilegeException("module-List"); 
+						}
+					}
+				}
+				else
+				{
+					this.rollback();
+					throw new PrevilegeException("module-List");  
+				}
+
 			}
 
 
@@ -183,13 +219,17 @@ public class ModuleAppImpl implements ModuleApp {
 		}
 
 		catch (Exception e) {
-			tx.rollback();
-			session.close();
 
+			this.rollback();
 			throw new BussinessException("Failed - "+e.getMessage());  
 		}
 		session.close();
 		return  form;
+	}
+	private void rollback()
+	{
+		tx.rollback();
+		session.close();
 	}
 
 

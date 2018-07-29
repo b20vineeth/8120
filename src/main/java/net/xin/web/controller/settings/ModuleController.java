@@ -5,27 +5,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller; 
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody; 
 
 import com.google.gson.Gson;
 
-import net.xin.web.form.settings.ModuleForm;
-import net.xin.web.form.settings.UserSetupForm;
-import net.xin.web.packages.framework.PasswordSecurity;
+import net.xin.web.form.settings.ModuleForm; 
 import net.xin.web.packages.framework.UserBean;
 import net.xin.web.packages.framework.ValidationForm;
 import net.xin.web.packages.framework.Exception.BusinessViolatonException;
 import net.xin.web.packages.framework.Exception.BussinessException;
-import net.xin.web.packages.framework.Exception.PrevilegeException;
-import net.xin.web.packages.framework.dataConnection.UniqueValidation;
+import net.xin.web.packages.framework.Exception.PrevilegeException; 
 import net.xin.web.service.settings.ModuleService;
 import net.xin.web.vo.settings.UserSetup;
 
@@ -137,10 +132,21 @@ public class ModuleController   {
 	} 
 	@RequestMapping(value="/module.get",method=RequestMethod.GET)
 	@ResponseBody
-	public String  moduleGet(ModelMap modelMap,@RequestBody  @RequestParam("datas") String id) throws BussinessException 
+	public String  moduleGet(ModelMap modelMap,@RequestBody  @RequestParam("datas") String id)  
 	{
 		UserBean user =new UserBean();
-		ValidationForm	form=service.moduleList(id,user);
+		ValidationForm form = null;
+		try {
+			form = service.moduleGetById(id,user);
+		} catch (PrevilegeException e) {
+			 
+			e.printStackTrace();
+		}
+		catch (BussinessException e) {
+			 
+			e.printStackTrace();
+		}
+		
 		String data=gson.toJson(form);
 		System.out.println(data);
 		return id;

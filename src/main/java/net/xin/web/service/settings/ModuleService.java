@@ -13,6 +13,6 @@ public interface ModuleService {
 
 	ValidationForm moduleSave(ModuleForm module, UserBean user) throws BussinessException, BusinessViolatonException, PrevilegeException;
 
-	ValidationForm moduleList(String id, UserBean user) throws BussinessException;
+	ValidationForm moduleGetById(String id, UserBean user) throws BussinessException,PrevilegeException;
 
 }

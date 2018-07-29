@@ -56,9 +56,9 @@ public class ModuleServiceImpl implements ModuleService {
 
 	}
 	@Override
-	public ValidationForm moduleList(String id, UserBean user) throws BussinessException {
+	public ValidationForm moduleGetById(String id, UserBean user) throws BussinessException ,PrevilegeException {
 		 
-		return moduleApp.moduleList(id,user);
+		return moduleApp.moduleGetById(id,user);
 		 
 	}
 }
