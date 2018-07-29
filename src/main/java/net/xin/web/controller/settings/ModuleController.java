@@ -23,7 +23,8 @@ import net.xin.web.packages.framework.PasswordSecurity;
 import net.xin.web.packages.framework.UserBean;
 import net.xin.web.packages.framework.ValidationForm;
 import net.xin.web.packages.framework.Exception.BusinessViolatonException;
-import net.xin.web.packages.framework.Exception.BussineException;
+import net.xin.web.packages.framework.Exception.BussinessException;
+import net.xin.web.packages.framework.Exception.PrevilegeException;
 import net.xin.web.packages.framework.dataConnection.UniqueValidation;
 import net.xin.web.service.settings.ModuleService;
 import net.xin.web.vo.settings.UserSetup;
@@ -93,7 +94,11 @@ public class ModuleController   {
 			{
 				System.out.println("Unique Violation "+e);
 			}
-			catch (BussineException e) {
+			catch(PrevilegeException e)
+			{
+				e.printStackTrace();
+			}
+			catch (BussinessException e) {
 				 
 				e.printStackTrace();
 			}
@@ -117,8 +122,8 @@ public class ModuleController   {
 
 			try {
 				ValidationForm	form=service.moduleSave(module,user);
-			} catch (BussineException | BusinessViolatonException e) {
-				// TODO Auto-generated catch block
+			} catch (BussinessException | BusinessViolatonException | PrevilegeException e) {
+			 
 				e.printStackTrace();
 			}
 
@@ -132,7 +137,7 @@ public class ModuleController   {
 	} 
 	@RequestMapping(value="/module.get",method=RequestMethod.GET)
 	@ResponseBody
-	public String  moduleGet(ModelMap modelMap,@RequestBody  @RequestParam("datas") String id) throws BussineException 
+	public String  moduleGet(ModelMap modelMap,@RequestBody  @RequestParam("datas") String id) throws BussinessException 
 	{
 		UserBean user =new UserBean();
 		ValidationForm	form=service.moduleList(id,user);

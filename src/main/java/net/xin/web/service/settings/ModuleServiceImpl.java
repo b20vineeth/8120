@@ -9,8 +9,9 @@ import net.xin.web.form.settings.ModuleForm;
 import net.xin.web.packages.framework.FormValidation;
 import net.xin.web.packages.framework.UserBean;
 import net.xin.web.packages.framework.ValidationForm;
-import net.xin.web.packages.framework.Exception.BusinessViolatonException;
-import net.xin.web.packages.framework.Exception.BussineException;
+import net.xin.web.packages.framework.Exception.BusinessViolatonException; 
+import net.xin.web.packages.framework.Exception.BussinessException;
+import net.xin.web.packages.framework.Exception.PrevilegeException;
 
 @Component
 public class ModuleServiceImpl implements ModuleService {
@@ -23,7 +24,7 @@ public class ModuleServiceImpl implements ModuleService {
 		return moduleApp.save();
 	}
 	@Override
-	public ValidationForm moduleSave(ModuleForm module, UserBean user) throws BussineException, BusinessViolatonException {
+	public ValidationForm moduleSave(ModuleForm module, UserBean user) throws PrevilegeException,BussinessException, BusinessViolatonException {
 
 		 
 			try
@@ -43,15 +44,19 @@ public class ModuleServiceImpl implements ModuleService {
 			{
 				throw new BusinessViolatonException(e.getMessage()); 
 			}
+			catch(PrevilegeException e)
+			{
+				throw new PrevilegeException(e.getMessage()); 
+			}
 			 catch (Exception e)
 			{
-				throw new BussineException(e.getMessage());  
+				throw new BussinessException(e.getMessage());  
 			}
 		 
 
 	}
 	@Override
-	public ValidationForm moduleList(String id, UserBean user) throws BussineException {
+	public ValidationForm moduleList(String id, UserBean user) throws BussinessException {
 		 
 		return moduleApp.moduleList(id,user);
 		 
