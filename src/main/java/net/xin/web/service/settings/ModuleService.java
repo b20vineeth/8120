@@ -15,4 +15,6 @@ public interface ModuleService {
 
 	ValidationForm moduleGetById(String id, UserBean user) throws BussinessException,PrevilegeException;
 
+	ValidationForm moduleList(ModuleForm module, UserBean user);
+
 }

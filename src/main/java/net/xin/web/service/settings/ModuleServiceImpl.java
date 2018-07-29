@@ -61,4 +61,9 @@ public class ModuleServiceImpl implements ModuleService {
 		return moduleApp.moduleGetById(id,user);
 		 
 	}
+	@Override
+	public ValidationForm moduleList(ModuleForm module, UserBean user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

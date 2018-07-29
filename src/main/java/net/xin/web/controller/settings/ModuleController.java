@@ -62,8 +62,8 @@ public class ModuleController   {
 		}
 		catch (BusinessViolatonException e)
 		{
-		 e.printStackTrace();
-		 return "Error";
+			e.printStackTrace();
+			return "Error";
 		}
 		catch(Exception e)
 		{
@@ -94,7 +94,7 @@ public class ModuleController   {
 				e.printStackTrace();
 			}
 			catch (BussinessException e) {
-				 
+
 				e.printStackTrace();
 			}
 
@@ -110,24 +110,26 @@ public class ModuleController   {
 	public String  moduleList(ModelMap modelMap) 
 	{
 		UserBean user =new UserBean();
-		String data=null;
+		ValidationForm form =new ValidationForm();
+		form.setSearchKey("module");
+
 		if(user.getUserSetup()!=null)
 		{
 			ModuleForm module=new ModuleForm();
 
 			try {
-				ValidationForm	form=service.moduleSave(module,user);
-			} catch (BussinessException | BusinessViolatonException | PrevilegeException e) {
-			 
+				form=service.moduleList(module,user);
+			} catch ( Exception  e) {
+
 				e.printStackTrace();
 			}
 
 		}
 		else
 		{
-			data="AF";
+
 		}
-		return data; 
+		return ""; 
 
 	} 
 	@RequestMapping(value="/module.get",method=RequestMethod.GET)
@@ -139,14 +141,14 @@ public class ModuleController   {
 		try {
 			form = service.moduleGetById(id,user);
 		} catch (PrevilegeException e) {
-			 
+
 			e.printStackTrace();
 		}
 		catch (BussinessException e) {
-			 
+
 			e.printStackTrace();
 		}
-		
+
 		String data=gson.toJson(form);
 		System.out.println(data);
 		return id;
