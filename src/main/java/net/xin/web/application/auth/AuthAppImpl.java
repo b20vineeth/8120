@@ -72,10 +72,13 @@ public class AuthAppImpl implements AuthApp {
 			user=authdao.save(user);
 			validationForm=new ValidationForm();
 			validationForm.setObj(user);
+			validationForm.setResult(true);
+			
 			tx.commit();
 		}
 		catch (Exception e) {
 			tx.rollback();
+			validationForm.setResult(false);
 		}
 		session.close();
 		return  validationForm;

@@ -5,14 +5,24 @@ import javax.transaction.TransactionManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import net.xin.web.form.settings.ModuleForm;
+import net.xin.web.packages.framework.PasswordSecurity;
 import net.xin.web.packages.framework.UserBean;
 import net.xin.web.packages.framework.ValidationForm;
-import net.xin.web.persistence.settings.ModuleDao;
+import net.xin.web.packages.framework.Exception.BusinessViolatonException;
+import net.xin.web.packages.framework.Exception.BussineException; 
+import net.xin.web.packages.framework.dataConnection.UniqueValidation;
+import net.xin.web.persistence.settings.ModuleDao; 
+import net.xin.web.utility.beanCopy.BeanCopy;
 import net.xin.web.vo.settings.Module;
 
 @Service
@@ -50,28 +60,96 @@ public class ModuleAppImpl implements ModuleApp {
 
 
 	@Override
-	public ValidationForm moduleSave(ModuleForm module, UserBean user) {
-		
-		ValidationForm form=null;
+	public ValidationForm moduleSave(ModuleForm module, UserBean user) throws BussineException, BusinessViolatonException {
+
+		ValidationForm form= new ValidationForm();
 		try 
 		{
 			this.session = sessionFactory.openSession();
 			this.tx = session.beginTransaction();
 			moduledao.transaction(session);
-			
-			
 			Module moduleVo=new Module();
-			
-			
+			if(module.getModuleId()!=null && 
+					module.getModuleId().trim().length()>0)
+			{
+				module.setModuleId(new PasswordSecurity().decrypt(module.getModuleId()));
+				moduleVo=moduledao.find(module.getModuleId());
+				moduleVo=new BeanCopy().copyModule(module,moduleVo);
+			}
+			else
+			{
+				moduleVo=new BeanCopy().copyModule(module);
+				moduleVo.setUser(user.getUserSetup());
+			}
+
+			moduleVo.setUpdatedBy(user.getUserSetup());
 			moduleVo=moduledao.moduleSave(moduleVo);
+
+			form.setObj(moduleVo);
+			form.setResult(true);
 			tx.commit();
+
+		}
+		catch (ConstraintViolationException  ex)
+		{
+			tx.rollback();
+			String exceptionCode="IN";
+			if(!new UniqueValidation(session).isUnique(module.getModuleCode(), "module_code", "module"))
+			{
+				exceptionCode="ModuleCode-D";
+			}
+			session.close();
+
+			throw new BusinessViolatonException(exceptionCode);  
+
+
 		}
 		catch (Exception e) {
 			tx.rollback();
+			session.close();
+
+			throw new BussineException("Failed - "+e.getMessage());  
 		}
 		session.close();
 		return  form;
-		
+
+	}
+
+
+	@Override
+	public ValidationForm moduleList(String id, UserBean user) throws BussineException {
+
+		ValidationForm form= new ValidationForm();
+		try 
+		{
+			this.session = sessionFactory.openSession();
+			this.tx = session.beginTransaction();
+			moduledao.transaction(session);
+			Module moduleVo=new Module();
+			ModuleForm module=null;
+			if(id!=null && 
+					id.trim().length()>0)
+			{ 
+				moduleVo=moduledao.find(id);
+				if(moduleVo!=null)
+					module=new BeanCopy().copyModuleFormToModule(moduleVo); 
+			}
+
+
+			form.setObj(module);
+			form.setResult(true);
+			tx.commit();
+
+		}
+
+		catch (Exception e) {
+			tx.rollback();
+			session.close();
+
+			throw new BussineException("Failed - "+e.getMessage());  
+		}
+		session.close();
+		return  form;
 	}
 
 

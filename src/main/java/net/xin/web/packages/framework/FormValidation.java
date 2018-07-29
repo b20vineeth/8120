@@ -54,7 +54,7 @@ public class FormValidation {
 						if(value!=null)
 						{
 							value= new PasswordSecurity().decrypt(value);
-							if(value!=null && value.trim().length()>0)
+							if(value==null)
 							{	
 								isregexValidate=false;
 								item.setMsg("encryption Failed");
@@ -120,7 +120,8 @@ public class FormValidation {
 				
 
 			}
-			forms.setItem(list);
+			//forms.item=new List<ValidationItem>();
+	 	forms.setItem(list);
 		}
 		catch(Exception e){
 			forms.setResult(false);

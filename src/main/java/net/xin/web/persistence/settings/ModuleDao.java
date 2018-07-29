@@ -13,4 +13,6 @@ public interface ModuleDao {
 
 	Module moduleSave(Module moduleVo);
 
+	Module find(String moduleId);
+
 }

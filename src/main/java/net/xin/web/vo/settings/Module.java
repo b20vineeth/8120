@@ -40,6 +40,11 @@ public class Module {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserSetup  user;
+	
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private UserSetup  updatedBy;
 	 
 	@Column(name = "status", length=1)
 	private String status="Y";
@@ -59,10 +64,28 @@ public class Module {
 	
 	
 	
+	@Column(name = "created_date", columnDefinition="DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDate;
 	
 	
 	
-	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public UserSetup getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(UserSetup updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
 	public Integer getModuleId() {
 		return moduleId;
 	}

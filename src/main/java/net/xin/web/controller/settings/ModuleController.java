@@ -8,22 +8,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
 import net.xin.web.form.settings.ModuleForm;
+import net.xin.web.form.settings.UserSetupForm;
+import net.xin.web.packages.framework.PasswordSecurity;
 import net.xin.web.packages.framework.UserBean;
 import net.xin.web.packages.framework.ValidationForm;
+import net.xin.web.packages.framework.Exception.BusinessViolatonException;
+import net.xin.web.packages.framework.Exception.BussineException;
+import net.xin.web.packages.framework.dataConnection.UniqueValidation;
 import net.xin.web.service.settings.ModuleService;
+import net.xin.web.vo.settings.UserSetup;
 
 @Controller
 public class ModuleController   {
 
 	@Autowired
-	protected ModuleService service;
-
+	protected ModuleService service; 
+	Gson gson;
 	@Autowired
 	protected HttpServletResponse response;
 	@Autowired
@@ -31,25 +41,41 @@ public class ModuleController   {
 	@Autowired
 	protected HttpSession session;
 	@RequestMapping("/module.save")
+	@ResponseBody
 	public String  moduleSave(ModelMap modelMap) 
 	{
-		UserBean user =new UserBean();
-		String data=null;
-		if(user.getUserSetup()!=null)
+		try
 		{
-			ModuleForm module=new ModuleForm();
+			UserBean user =new UserBean();
+			String data=null;
+			UserSetup usersetup=new UserSetup();
+			usersetup.setUserId(1);
+			user.setUserSetup(usersetup);
+			ModuleForm module=new ModuleForm(); 
+			module.setModuleName("Picmass");
+			module.setModuleCode("P2");
+			gson= new Gson();
+			String datas = gson.toJson(module);
+			module= gson.fromJson(datas,ModuleForm.class);
+			System.out.println(datas);
 
 			ValidationForm	form=service.moduleSave(module,user);
-			 
+			datas=gson.toJson(form.isResult());
+			System.out.println(datas);
+			return data; 
 		}
-		else
+		catch (BusinessViolatonException e)
 		{
-			data="AF";
+		 e.printStackTrace();
+		 return "Error";
 		}
-		return data; 
+		catch(Exception e)
+		{
+			return "Error";
+		}
 
 	}
-	
+
 	@RequestMapping("/module.edit")
 	public String  moduleEdit(ModelMap modelMap) 
 	{
@@ -59,8 +85,19 @@ public class ModuleController   {
 		{
 			ModuleForm module=new ModuleForm();
 
-			ValidationForm	form=service.moduleSave(module,user);
-			 
+
+			try {
+				ValidationForm	form=service.moduleSave(module,user);
+			} 
+			catch (BusinessViolatonException e)
+			{
+				System.out.println("Unique Violation "+e);
+			}
+			catch (BussineException e) {
+				 
+				e.printStackTrace();
+			}
+
 		}
 		else
 		{
@@ -78,8 +115,13 @@ public class ModuleController   {
 		{
 			ModuleForm module=new ModuleForm();
 
-			ValidationForm	form=service.moduleSave(module,user);
-			 
+			try {
+				ValidationForm	form=service.moduleSave(module,user);
+			} catch (BussineException | BusinessViolatonException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		else
 		{
@@ -87,24 +129,16 @@ public class ModuleController   {
 		}
 		return data; 
 
-	}
-	@RequestMapping("/module.get")
-	public String  moduleGet(ModelMap modelMap) 
+	} 
+	@RequestMapping(value="/module.get",method=RequestMethod.GET)
+	@ResponseBody
+	public String  moduleGet(ModelMap modelMap,@RequestBody  @RequestParam("datas") String id) throws BussineException 
 	{
 		UserBean user =new UserBean();
-		String data=null;
-		if(user.getUserSetup()!=null)
-		{
-			ModuleForm module=new ModuleForm();
-
-			ValidationForm	form=service.moduleSave(module,user);
-			 
-		}
-		else
-		{
-			data="AF";
-		}
-		return data; 
+		ValidationForm	form=service.moduleList(id,user);
+		String data=gson.toJson(form);
+		System.out.println(data);
+		return id;
 
 	}
 
