@@ -67,8 +67,22 @@ public class UserSetup {
 	@Column(name = "validity_From", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date validityFrom;
+	@Column(name = "description", length=250)
+	private String description;
 	
 	
+	
+	
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	public Date getValidityTo() {
 		return validityTo;
 	}
