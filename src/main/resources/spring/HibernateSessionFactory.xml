@@ -23,7 +23,12 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 			<list>
 				<value>net.xin.web.vo.settings.UserSetup</value>
 				<value>net.xin.web.vo.settings.Module</value>
-				 
+				<value>net.xin.web.vo.settings.UserGroup</value>
+				<value>net.xin.web.vo.settings.PrivilegeType</value>
+				<value>net.xin.web.vo.settings.Privilege</value>
+				<value>net.xin.web.vo.settings.PrivilegeGroup</value>
+				<value>net.xin.web.vo.settings.AssignPrivilege</value>
+				
 			</list>
 		</property>
 		<property name="mappingResources">
