@@ -15,11 +15,7 @@
 	<mvc:annotation-driven>
 		<mvc:path-matching path-matcher="pathMatcher" />
 	</mvc:annotation-driven>
-	<bean
-		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-
+ 
 
 	<bean id="pathMatcher" class="org.springframework.util.AntPathMatcher">
 		<property name="caseSensitive" value="false" />

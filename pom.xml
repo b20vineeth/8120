@@ -23,7 +23,7 @@
 	</properties>
 	<dependencies>
 
-		 
+		  
 
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -60,7 +60,14 @@
 			<version>${org.hibernate-c3p0}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>1.6</version>
+		</dependency>
+
 		 
+
 
 
 
