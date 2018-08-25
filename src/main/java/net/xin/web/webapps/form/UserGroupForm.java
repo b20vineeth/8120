@@ -1,4 +1,4 @@
-package net.xin.web.form.settings;
+package net.xin.web.webapps.form;
 
 import java.io.Serializable;
 import java.util.Date;

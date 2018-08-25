@@ -1,4 +1,4 @@
-package net.xin.web.form.settings;
+package net.xin.web.webapps.form;
 
 import java.util.Date;
 

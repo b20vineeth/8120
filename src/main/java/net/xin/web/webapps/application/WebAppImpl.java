@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.xin.web.form.settings.ModuleForm;
-import net.xin.web.form.settings.UserSetupForm;
 import net.xin.web.packages.framework.PasswordSecurity; 
-import net.xin.web.packages.framework.ValidationForm; 
+import net.xin.web.packages.framework.ValidationForm;
+import net.xin.web.webapps.form.ModuleForm;
+import net.xin.web.webapps.form.UserSetupForm;
 import net.xin.web.webapps.persistence.AuthDao;
 import net.xin.web.webapps.vo.Module;
 import net.xin.web.webapps.vo.UserSetup;

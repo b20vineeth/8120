@@ -1,4 +1,4 @@
-package net.xin.web.form.settings;
+package net.xin.web.webapps.form;
 
 import java.util.Date;
 
@@ -18,57 +18,53 @@ import net.xin.web.packages.framework.Annotations;
 import net.xin.web.utility.validation.RegexResource;
 import net.xin.web.webapps.vo.UserSetup;
 
-public class ModuleForm {
+
+public class PrivilegeTypeForm {
+
+
+	private static final long serialVersionUID = 1L;
+
+	@Annotations(max=24,min=2,mandatory=true,callMethod=RegexResource.ALBHANUM) 
+	private String privilegeTypeCode;
 
 	@Annotations(max=120,min=0,decode = true,callMethod=RegexResource.isNumber) 
-	private String moduleId ;
+	private String privilegeTypeId ;
 	@Annotations(max=24,min=2,callMethod=RegexResource.ALBHANUM,mandatory=true) 
-	private String moduleName;
-	@Annotations(max=24,min=2,mandatory=true,callMethod=RegexResource.ALBHANUM) 
-	private String moduleCode;
+	private String privilegeTypeName;
+
+
+
 	@Annotations(max=1,min=1,callMethod=RegexResource.isStatus) 
 	private String status="Y";
+
 	private String updatedDate;
 	private String createdDate;
+
 	@Annotations(max=120,min=1,callMethod=RegexResource.date) 
 	private String validityTo;
 	@Annotations(max=10,min=10,callMethod=RegexResource.date) 
 	private String validityFrom;
-	
-	
+
+
 	private String createdBy;
 	private String updatedBy;
-	
-	
-	public String getCreatedBy() {
-		return createdBy;
+	public String getPrivilegeTypeCode() {
+		return privilegeTypeCode;
 	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setPrivilegeTypeCode(String privilegeTypeCode) {
+		this.privilegeTypeCode = privilegeTypeCode;
 	}
-	public String getUpdatedBy() {
-		return updatedBy;
+	public String getPrivilegeTypeId() {
+		return privilegeTypeId;
 	}
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setPrivilegeTypeId(String privilegeTypeId) {
+		this.privilegeTypeId = privilegeTypeId;
 	}
-	public String getModuleId() {
-		return moduleId;
+	public String getPrivilegeTypeName() {
+		return privilegeTypeName;
 	}
-	public void setModuleId(String moduleId) {
-		this.moduleId = moduleId;
-	}
-	public String getModuleName() {
-		return moduleName;
-	}
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
-	public String getModuleCode() {
-		return moduleCode;
-	}
-	public void setModuleCode(String moduleCode) {
-		this.moduleCode = moduleCode;
+	public void setPrivilegeTypeName(String privilegeTypeName) {
+		this.privilegeTypeName = privilegeTypeName;
 	}
 	public String getStatus() {
 		return status;
@@ -100,6 +96,22 @@ public class ModuleForm {
 	public void setValidityFrom(String validityFrom) {
 		this.validityFrom = validityFrom;
 	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+
+
+
 
 
 

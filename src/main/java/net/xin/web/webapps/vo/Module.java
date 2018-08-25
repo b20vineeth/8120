@@ -41,9 +41,7 @@ public class Module {
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserSetup  user;
 	
-	 
-	
-	
+	  
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "updated_by", nullable = false)
 	private UserSetup  updatedBy;

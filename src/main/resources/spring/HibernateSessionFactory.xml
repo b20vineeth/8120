@@ -20,6 +20,11 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		</property>
 		<property name="annotatedClasses">
 			<list>
+			
+			
+				<value>net.xin.web.webapps.vo.UserSetup</value>
+				<value>net.xin.web.webapps.vo.Module</value>
+				<value>net.xin.web.webapps.vo.Menu</value>
 <!-- 				<value>net.xin.web.vo.settings.UserSetup</value> -->
 <!-- 				<value>net.xin.web.vo.settings.Module</value> -->
 <!-- 				<value>net.xin.web.vo.settings.UserGroup</value> -->

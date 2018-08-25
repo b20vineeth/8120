@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import net.xin.web.form.settings.UserGroupForm;
-import net.xin.web.form.settings.UserSetupForm;
 import net.xin.web.utility.Query.AuthQueryResource;
+import net.xin.web.webapps.form.UserGroupForm;
+import net.xin.web.webapps.form.UserSetupForm;
 import net.xin.web.webapps.vo.Module;
 import net.xin.web.webapps.vo.UserSetup;
 

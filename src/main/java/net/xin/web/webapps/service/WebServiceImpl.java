@@ -2,11 +2,11 @@ package net.xin.web.webapps.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-  
-import net.xin.web.form.settings.UserSetupForm;
+
 import net.xin.web.packages.framework.FormValidation; 
 import net.xin.web.packages.framework.ValidationForm;
-import net.xin.web.webapps.application.WebApp; 
+import net.xin.web.webapps.application.WebApp;
+import net.xin.web.webapps.form.UserSetupForm; 
 
 @Component
 public class WebServiceImpl implements WebService {
