@@ -1,6 +1,6 @@
-package net.xin.web.utility.Query;
+package net.xin.web.utility;
 
-public class AuthQueryResource {
+public class WebAppsQueryResource {
 
 	public static final String FETCH_BY_USER_ID = "From UserSetup u where u.userId=:userId";
 
