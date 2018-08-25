@@ -7,7 +7,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/mod_db?autoReconnect=true&amp;useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/easypick?autoReconnect=true&amp;useUnicode=true&amp;createDatabaseIfNotExist=true&amp;characterEncoding=utf-8" />
 		
 	<!--  	<property name="hibernate.connection.CharSet"  value="utf8"/>
         <property name="hibernate.connection.characterEncoding"  value="utf8"/> 
