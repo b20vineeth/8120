@@ -21,7 +21,7 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>net.xin.web.vo.settings.UserSetup</value>
+<!-- 				<value>net.xin.web.vo.settings.UserSetup</value> -->
 				 
 				
 			</list>
