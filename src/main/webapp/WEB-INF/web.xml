@@ -27,6 +27,30 @@
 		</web-resource-collection>
 
 	</security-constraint>
-
+	<error-page>
+		<!-- Missing login -->
+		<error-code>401</error-code>
+		<location>/401</location>
+	</error-page>
+	<error-page>
+		<!-- Forbidden directory listing -->
+		<error-code>403</error-code>
+		<location>/403</location>
+	</error-page>
+	<error-page>
+		<!-- Missing resource -->
+		<error-code>404</error-code>
+		<location>/404</location>
+	</error-page>
+	<error-page>
+		<!-- Uncaught exception -->
+		<error-code>500</error-code>
+		<location>/500</location>
+	</error-page>
+	<error-page>
+		<!-- Unsupported servlet method -->
+		<error-code>503</error-code>
+		<location>/503</location>
+	</error-page>
 
 </web-app>

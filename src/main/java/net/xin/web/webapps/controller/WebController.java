@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller; 
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -29,111 +31,67 @@ public class WebController   {
 	protected HttpServletRequest request;
 	@Autowired
 	protected HttpSession session;
-	@RequestMapping("/auth.save")
-	public String  authSignup(ModelMap modelMap) 
-	{
-		return null;
-//		UserBean user =new UserBean();
-//		String data=null;
-//		if(user.getUserSetup()==null)
-//		{
-//			UserSetupForm form=new  UserSetupForm();
-//			form.setEmail("Vineeth@gmail.com");
-//			form.setFirstName("Vineethb");
-//			form.setLastName("B");
-//			form.setMobileNumber("1196541880");
-//			form.setPassword("9638527410");
-//			form.setPrefixMob("963");
-//			form.setUserName("VineethB1");
-//			gson= new Gson();
-//			try {
-//				form.setUserId(new PasswordSecurity().encrypt("5"));
-//			} catch ( Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}  
-//			String datas = gson.toJson(form);
-//			form= gson.fromJson(datas,UserSetupForm.class);
-//			System.out.println(datas);
-//			ValidationForm userSetup=new ValidationForm();
-//			userSetup=service.Signup(form);
-//			datas=gson.toJson(userSetup);
-//			System.out.println(datas);
-//
-//		}
-//		else
-//		{
-//			data="AF";
-//		}
-//		return data; 
-
-	}
 	
 	
-	@RequestMapping("/login")
-	public ModelAndView  loginPage(ModelMap modelMap) 
+	 
+	@RequestMapping("/")
+	public ModelAndView  homePage(ModelMap modelMap) 
 	{
 		
 		  
 		if(true)
 		{
-			modelMap.addAttribute("version", "1.0.0.25.1.0");
-			return new ModelAndView("settings/auth/login");
+			 return new ModelAndView("Screen/HomePage");
 			 
 		}
 		else
 		{
-			modelMap.addAttribute("redirect", "/");
-			return new ModelAndView("Screen/Redirect");
+			 return new ModelAndView("Screen/HomePage");
 		}
 	
 	}
-	@RequestMapping("/auth.login")
-	public String  authLoginPage(ModelMap modelMap) 
-	{
-		
-		
-		
-		return null;
-	
+	 
+	@RequestMapping(value="/{param1}")
+	@ResponseBody
+	public ModelAndView oneParameter(@PathVariable("param1") String param1){
+		 return new ModelAndView("Screen/OneParameter");
 	}
-	@RequestMapping("/auth.authenticate")
-	public String  authenticate(ModelMap modelMap) 
-	{
-		return null;
+	@RequestMapping(value="/{param1}/{param2}")
+	@ResponseBody
+	public ModelAndView TwoParameter(@PathVariable("param1") String param1,
+			@PathVariable("param2") String param2
+			){
+		 return new ModelAndView("Screen/TwoParameter");
+	}	
 	
+	@RequestMapping(value="/{param1}/{param2}/{param3}")
+	@ResponseBody
+	public ModelAndView TwoParameter(@PathVariable("param1") String param1,
+			@PathVariable("param2") String param2,
+			@PathVariable("param3") String param3
+			){
+		 return new ModelAndView("Screen/ThreeParameter");
 	}
 	
-	@RequestMapping("/auth.userList")
-	public String  authUserList(ModelMap modelMap) 
-	{
-		return null;
-	
+	@RequestMapping(value="/{param1}/{param2}/{param3}/{param4}")
+	@ResponseBody
+	public ModelAndView TwoParameter(@PathVariable("param1") String param1,
+			@PathVariable("param2") String param2,
+			@PathVariable("param3") String param3,
+			@PathVariable("param4") String param4
+			){
+		 return new ModelAndView("Screen/FourParameter");
 	}
-	@RequestMapping("/auth.getUser")
-	public String  authGetUser(ModelMap modelMap) 
-	{
-		return null;
 	
+	@RequestMapping(value="/{param1}/{param2}/{param3}/{param4}/{param5}")
+	@ResponseBody
+	public ModelAndView TwoParameter(@PathVariable("param1") String param1,
+			@PathVariable("param2") String param2,
+			@PathVariable("param3") String param3,
+			@PathVariable("param4") String param4,
+			@PathVariable("param5") String param5
+			){
+		 return new ModelAndView("Screen/FiveParameter");
 	}
-	@RequestMapping("/auth.validateEmail")
-	public String  authValidateEmail(ModelMap modelMap) 
-	{
-		return null;
-	
-	}
-	@RequestMapping("/auth.resendEmail")
-	public String  authResendEmail(ModelMap modelMap) 
-	{
-		return null;
-	
-	}
-	@RequestMapping("/auth.verifyEmail")
-	public String  authVerifyEmail(ModelMap modelMap) 
-	{
-		return null;
-	
-	}
-
 
 }
