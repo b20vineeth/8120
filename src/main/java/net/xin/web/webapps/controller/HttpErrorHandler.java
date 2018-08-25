@@ -1,5 +1,6 @@
-package net.xin.web.apps.controller;
- 
+package net.xin.web.webapps.controller;
+
+
 import org.springframework.stereotype.Controller; 
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
