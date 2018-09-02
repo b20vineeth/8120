@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.xin.web.packages.framework.PasswordSecurity; 
 import net.xin.web.packages.framework.ValidationForm;
+import net.xin.web.webapps.ResultForm.Form;
 import net.xin.web.webapps.form.ModuleForm;
 import net.xin.web.webapps.form.UserSetupForm;
 import net.xin.web.webapps.persistence.AuthDao;
@@ -80,6 +81,16 @@ public class WebAppImpl implements WebApp {
 //		}
 //		session.close();
 		//return  validationForm;
+	}
+
+
+
+
+
+	@Override
+	public Form getHompageMenu(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

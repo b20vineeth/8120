@@ -24,7 +24,16 @@ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 			
 				<value>net.xin.web.webapps.vo.UserSetup</value>
 				<value>net.xin.web.webapps.vo.Module</value>
-				<value>net.xin.web.webapps.vo.Menu</value>
+				<value>net.xin.web.webapps.vo.Menu</value> 
+				<value>net.xin.web.webapps.vo.Privilege</value>
+				<value>net.xin.web.webapps.vo.PrivilegeGroup</value>
+				<value>net.xin.web.webapps.vo.UserGroup</value>
+				<value>net.xin.web.webapps.vo.UserPrivilegeGroup</value>
+				<value>net.xin.web.webapps.vo.AssignGroup</value>
+			    <value>net.xin.web.webapps.vo.AssignPrivilegeGroup</value>
+			    <value>net.xin.web.webapps.vo.Gallery</value>
+				
+				
 <!-- 				<value>net.xin.web.vo.settings.UserSetup</value> -->
 <!-- 				<value>net.xin.web.vo.settings.Module</value> -->
 <!-- 				<value>net.xin.web.vo.settings.UserGroup</value> -->

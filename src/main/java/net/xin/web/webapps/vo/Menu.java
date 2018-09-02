@@ -17,7 +17,7 @@ import javax.persistence.UniqueConstraint;
 import net.xin.web.webapps.vo.UserSetup;
 
 @Entity
-@Table(name = "menu" )
+@Table(name = "menu" , uniqueConstraints = { @UniqueConstraint(columnNames = { "menu_code" }) })
 
 public class Menu {
 
@@ -47,6 +47,11 @@ public class Menu {
 	private String countStatus="N";
 
 
+	
+	
+	
+	
+	
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)

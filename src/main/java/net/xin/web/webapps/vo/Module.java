@@ -17,11 +17,11 @@ import javax.persistence.UniqueConstraint;
 import net.xin.web.webapps.vo.UserSetup;
 
 @Entity
-@Table(name = "module" , uniqueConstraints = { @UniqueConstraint(columnNames = { "module_code" }) })
+@Table(name = "module" , uniqueConstraints = { @UniqueConstraint(columnNames = { "module_code","module_url" }) })
 
 public class Module {
 
-	
+
 	private static final long serialVersionUID = 1L;
 
 
@@ -30,164 +30,101 @@ public class Module {
 	@GeneratedValue 
 	@Column(name = "module_id")
 	private Integer moduleId ;
-
-	@Column(name = "module_name", length=120)
-	private String moduleName;
-	
-	@Column(name = "module_code", length=25)
+	@Column(name = "module_code", length=1)
 	private String moduleCode;
-
+	@Column(name = "module_Name", length=1)
+	private String moduleName;
+	@Column(name = "module_url", length=1)
+	private String moduleUrl;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserSetup  user;
-	
-	  
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "updated_by", nullable = false)
 	private UserSetup  updatedBy;
-	 
 	@Column(name = "status", length=1)
 	private String status="Y";
-
 	@Column(name = "updated_date", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
-	
 	@Column(name = "validity_to", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date validityTo;
- 
-	
 	@Column(name = "validity_From", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date validityFrom;
-	
-	
-	
 	@Column(name = "created_date", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
-
-
-
 	public Integer getModuleId() {
 		return moduleId;
 	}
-
-
-
 	public void setModuleId(Integer moduleId) {
 		this.moduleId = moduleId;
 	}
-
-
-
-	public String getModuleName() {
-		return moduleName;
-	}
-
-
-
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
-
-
-
 	public String getModuleCode() {
 		return moduleCode;
 	}
-
-
-
 	public void setModuleCode(String moduleCode) {
 		this.moduleCode = moduleCode;
 	}
-
-
-
+	public String getModuleName() {
+		return moduleName;
+	}
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
+	public String getModuleUrl() {
+		return moduleUrl;
+	}
+	public void setModuleUrl(String moduleUrl) {
+		this.moduleUrl = moduleUrl;
+	}
 	public UserSetup getUser() {
 		return user;
 	}
-
-
-
 	public void setUser(UserSetup user) {
 		this.user = user;
 	}
-
-
-
 	public UserSetup getUpdatedBy() {
 		return updatedBy;
 	}
-
-
-
 	public void setUpdatedBy(UserSetup updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
-
-
 	public String getStatus() {
 		return status;
 	}
-
-
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-
-
 	public Date getUpdatedDate() {
 		return updatedDate;
 	}
-
-
-
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-
-
-
 	public Date getValidityTo() {
 		return validityTo;
 	}
-
-
-
 	public void setValidityTo(Date validityTo) {
 		this.validityTo = validityTo;
 	}
-
-
-
 	public Date getValidityFrom() {
 		return validityFrom;
 	}
-
-
-
 	public void setValidityFrom(Date validityFrom) {
 		this.validityFrom = validityFrom;
 	}
-
-
-
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-
-
-
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	
-	 
-	 
+
+
+
+
+
 }

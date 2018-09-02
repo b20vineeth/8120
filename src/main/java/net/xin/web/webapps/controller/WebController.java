@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
- 
+import net.xin.web.webapps.ResultForm.Form;
 import net.xin.web.webapps.service.WebService;
   
 
@@ -37,7 +37,8 @@ public class WebController   {
 	@RequestMapping("/")
 	public ModelAndView  homePage(ModelMap modelMap) 
 	{
-		
+	
+		Form form=service.getHompageMenu("");
 		  
 		if(true)
 		{

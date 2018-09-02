@@ -1,11 +1,8 @@
 package net.xin.web.webapps.vo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,40 +14,37 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-@Entity
-@Table(name = "privilege")
+import net.xin.web.webapps.vo.Privilege;
 
-public class Privilege  implements Serializable{
+@Entity
+@Table(name = "privilege" , uniqueConstraints = { @UniqueConstraint(columnNames = { "privilge_code" }) })
+
+public class Privilege {
+
+
+	private static final long serialVersionUID = 1L;
+
+
 
 	@Id
 	@GeneratedValue 
 	@Column(name = "privilege_id")
-	int  privilegeId;
+	private Integer privilegeId ;
 
-	 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "module", nullable = false)
-	private Module  module;
-	 
 
-	@Column(name = "privilege_Code", length=250)
-	private String privilegeCode;
+	@Column(name = "privilge_code", length=120)
+	private String privilgeCode;
+	@Column(name = "privilge_Name", length=120)
+	private String privilgeName;
 
-	
+ 
 
-	@Column(name = "description", length=250)
-	private String description;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "privile_type", nullable = false)
-	private PrivilegeType  type;
-	
-	
+
+
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserSetup  user;
-
- 
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "updated_by", nullable = false)
@@ -73,48 +67,53 @@ public class Privilege  implements Serializable{
 	private Date validityFrom;
 
 
+
 	@Column(name = "created_date", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createDate;
+	private Date createdDate;
 
 
-	 
 
-	public String getDescription() {
-		return description;
-	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-	public PrivilegeType getType() {
-		return type;
-	}
-
-
-	public void setType(PrivilegeType type) {
-		this.type = type;
-	}
-
-
-	public int getPrivilegeId() {
+	public Integer getPrivilegeId() {
 		return privilegeId;
 	}
 
 
-	public void setPrivilegeId(int privilegeId) {
+
+	public void setPrivilegeId(Integer privilegeId) {
 		this.privilegeId = privilegeId;
 	}
 
 
-	 
+
+	public String getPrivilgeCode() {
+		return privilgeCode;
+	}
+
+
+
+	public void setPrivilgeCode(String privilgeCode) {
+		this.privilgeCode = privilgeCode;
+	}
+
+
+
+	public String getPrivilgeName() {
+		return privilgeName;
+	}
+
+
+
+	public void setPrivilgeName(String privilgeName) {
+		this.privilgeName = privilgeName;
+	}
+
+
 
 	public UserSetup getUser() {
 		return user;
 	}
+
 
 
 	public void setUser(UserSetup user) {
@@ -122,9 +121,11 @@ public class Privilege  implements Serializable{
 	}
 
 
+
 	public UserSetup getUpdatedBy() {
 		return updatedBy;
 	}
+
 
 
 	public void setUpdatedBy(UserSetup updatedBy) {
@@ -132,9 +133,11 @@ public class Privilege  implements Serializable{
 	}
 
 
+
 	public String getStatus() {
 		return status;
 	}
+
 
 
 	public void setStatus(String status) {
@@ -142,9 +145,11 @@ public class Privilege  implements Serializable{
 	}
 
 
+
 	public Date getUpdatedDate() {
 		return updatedDate;
 	}
+
 
 
 	public void setUpdatedDate(Date updatedDate) {
@@ -152,9 +157,11 @@ public class Privilege  implements Serializable{
 	}
 
 
+
 	public Date getValidityTo() {
 		return validityTo;
 	}
+
 
 
 	public void setValidityTo(Date validityTo) {
@@ -162,9 +169,11 @@ public class Privilege  implements Serializable{
 	}
 
 
+
 	public Date getValidityFrom() {
 		return validityFrom;
 	}
+
 
 
 	public void setValidityFrom(Date validityFrom) {
@@ -172,18 +181,22 @@ public class Privilege  implements Serializable{
 	}
 
 
-	public Date getCreateDate() {
-		return createDate;
+
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
 
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 
 
  
 
 
-} 
+
+
+
+}

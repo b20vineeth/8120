@@ -1,17 +1,29 @@
 package net.xin.web.webapps.controller;
 
 
+import java.beans.PropertyEditor;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller; 
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
- 
+
 
 @Controller
 public class HttpErrorHandler   {
 
- 
-	 
+
+
 	@RequestMapping("/404")
 	public ModelAndView  error404(ModelMap modelMap) 
 	{
@@ -42,6 +54,5 @@ public class HttpErrorHandler   {
 		return new ModelAndView("Error/500");
 
 	}
-
 
 }

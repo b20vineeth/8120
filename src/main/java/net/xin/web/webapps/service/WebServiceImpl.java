@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import net.xin.web.packages.framework.FormValidation; 
 import net.xin.web.packages.framework.ValidationForm;
+import net.xin.web.webapps.ResultForm.Form;
 import net.xin.web.webapps.application.WebApp;
 import net.xin.web.webapps.form.UserSetupForm; 
 
@@ -23,6 +24,11 @@ public class WebServiceImpl implements WebService {
 		else
 			return validationform;
  
+	}
+
+	@Override
+	public Form getHompageMenu(String string) {
+		return moduleApp.getHompageMenu(string);
 	}
 
 

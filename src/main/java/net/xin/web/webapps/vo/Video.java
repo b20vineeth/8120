@@ -17,11 +17,9 @@ import javax.persistence.UniqueConstraint;
 import net.xin.web.webapps.vo.UserSetup;
 
 @Entity
-@Table(name = "user_setup" , uniqueConstraints = { @UniqueConstraint(columnNames = { "username" ,"email"}) })
+@Table(name = "video" , uniqueConstraints = { @UniqueConstraint(columnNames = { "video_url" }) })
 
-
-
-public class UserSetup {
+public class Video {
 
 
 	private static final long serialVersionUID = 1L;
@@ -30,86 +28,60 @@ public class UserSetup {
 
 	@Id
 	@GeneratedValue 
-	@Column(name = "menu_id")
-	private Integer menuId ;
-
-
-
-
-
-	@Column(name = "username", length=120)
-	private String username;
-	@Column(name = "email", length=120)
-	private String Email;
-	@Column(name = "first_name", length=120)
-	private String Firstname;
-	@Column(name = "last_name", length=120)
-	private String lastname;
-
-
-
-
+	@Column(name = "video_id")
+	private Integer videoId ;
+	
+	@Column(name = "tag", length=251)
+	private String tag;
+	
+	@Column(name = "description",columnDefinition="TEXT")
+	private String description;
+	
+	@Column(name = "video_url", length=150)
+	private String videoUrl;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserSetup  user;
-
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "updated_by", nullable = false)
 	private UserSetup  updatedBy;
-
 	@Column(name = "status", length=1)
 	private String status="Y";
-
 	@Column(name = "updated_date", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
-
 	@Column(name = "validity_to", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date validityTo;
-
-
 	@Column(name = "validity_From", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date validityFrom;
-
-
-
 	@Column(name = "created_date", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate;
-
-
-
-	public Integer getMenuId() {
-		return menuId;
+	public Integer getVideoId() {
+		return videoId;
 	}
-	public void setMenuId(Integer menuId) {
-		this.menuId = menuId;
+	public void setVideoId(Integer videoId) {
+		this.videoId = videoId;
 	}
-	public String getUsername() {
-		return username;
+	public String getTag() {
+		return tag;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
-	public String getEmail() {
-		return Email;
+	public String getDescription() {
+		return description;
 	}
-	public void setEmail(String email) {
-		Email = email;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public String getFirstname() {
-		return Firstname;
+	public String getVideoUrl() {
+		return videoUrl;
 	}
-	public void setFirstname(String firstname) {
-		Firstname = firstname;
-	}
-	public String getLastname() {
-		return lastname;
-	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 	public UserSetup getUser() {
 		return user;
@@ -153,11 +125,6 @@ public class UserSetup {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
-
-
-
-
-
+	 
 
 }

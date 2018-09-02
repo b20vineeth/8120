@@ -27,6 +27,7 @@
 		</web-resource-collection>
 
 	</security-constraint>
+	 
 	<error-page>
 		<!-- Missing login -->
 		<error-code>401</error-code>
