@@ -1,11 +1,16 @@
 package net.xin.web.webapps.controller;
 
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller; 
 import org.springframework.ui.ModelMap;
@@ -21,9 +26,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import net.xin.web.packages.framework.ValidationForm;
 import net.xin.web.packages.framework.Exception.IllegalArugumentthrowException; 
 import net.xin.web.webapps.ResultForm.Form;
+import net.xin.web.webapps.form.admin.LoginForm;
 import net.xin.web.webapps.service.WebService;
+import net.xin.web.webapps.vo.UserSetup;
 
 
 @Controller
@@ -38,21 +46,38 @@ public class AdminController   {
 	protected HttpServletRequest request;
 	@Autowired
 	protected HttpSession session;
-
+	@Autowired
+	private MessageSource messageSource;
 
 
 	@RequestMapping("/login")
-	public ModelAndView  homePage(ModelMap modelMap) 
+	public ModelAndView  homePage(Locale locale,ModelMap modelMap) 
 	{
+		/*  ReloadableResourceBundleMessageSource messageSource =
+                  new ReloadableResourceBundleMessageSource();
+		  messageSource.setBasenames("locale\\label\\messages");*/
+		//String welcome = messageSource.getMessage("welcome.message", null, locale.US);
+		 
 		return new ModelAndView("Admin/Login");
 	}
-	@RequestMapping(value="/authenticate",method=RequestMethod.POST)
+	@RequestMapping(value="/authenticate",method=RequestMethod.GET)
 	@ResponseBody
 	public String  authenticate(ModelMap modelMap,@RequestBody  @RequestParam("datas") String data) 
 	{
-		//ModelMap modelMap,@RequestBody  @RequestParam("datas") String id
+		LoginForm login =new LoginForm();
+		login.setUsername("userName"); 
+		login.setPassword("password");
+		String datas = gson.toJson(login);
+		System.out.print(datas);
+		login= gson.fromJson(datas,LoginForm.class);
+		
+		ValidationForm form= service.authenticateUser(login);
 
 		return "authenticate";
+	}
+	private void authenticateUser() {
+		// TODO Auto-generated method stub
+		
 	}
 	@RequestMapping("/register")
 	public ModelAndView  Register(ModelMap modelMap) 
@@ -61,7 +86,12 @@ public class AdminController   {
 
 	}
 
+	@RequestMapping("/register.deactivate")
+	public ModelAndView  registerDeactivate(ModelMap modelMap) 
+	{
+		return new ModelAndView("Admin/Register");
 
+	}
 	@RequestMapping("/register.save")
 	public ModelAndView  registerSave(ModelMap modelMap) 
 	{
@@ -124,17 +154,13 @@ public class AdminController   {
 		return new ModelAndView("Admin/AssignPrivilege");
 	}
 	
-	@RequestMapping(value = "/testonly", method = { RequestMethod.GET})
-	 public String listBooksPOST( ModelMap modelMap,
-			 @RequestBody  @RequestParam(value="datas" , required = false ) 
-	 		String data)  
-	{ 
-		if(data==null)
-			new IllegalArugumentthrowException("400","JSON");
-		
-		return "Succes";
+	@RequestMapping("/assignPrivileges")
+	@ResponseBody
+	public String  assignPrivilege1(ModelMap modelMap) 
+	{
+		return "new ModelAndView";
 	}
-
+ 
 
 
 

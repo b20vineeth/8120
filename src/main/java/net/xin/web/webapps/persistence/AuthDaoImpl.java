@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import net.xin.web.utility.Query.AuthQueryResource;
+import net.xin.web.webapps.entity.Filter.LoginFilter;
 import net.xin.web.webapps.form.UserSetupForm;
 import net.xin.web.webapps.vo.Module;
 import net.xin.web.webapps.vo.UserSetup;
@@ -49,6 +50,23 @@ public class AuthDaoImpl implements AuthDao {
 		}
 		catch(Exception e){}
 		return null;
+	}
+
+
+
+	@Override
+	public UserSetup authenticateUser(LoginFilter filter) {
+		UserSetup user=null;
+		 
+		 	user = (UserSetup) session.createQuery(AuthQueryResource.AUTHENTICATION_QUERY)
+					.setString("username",filter.getUsername())
+					.setString("password1", filter.getPassword())
+					.setString("password1",  filter.getPassword())
+					.setString("email", filter.getPassword())
+					.uniqueResult();
+
+		 
+		   return user;
 	}
 
 }

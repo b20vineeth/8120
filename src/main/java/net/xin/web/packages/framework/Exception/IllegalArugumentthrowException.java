@@ -8,7 +8,7 @@ public class IllegalArugumentthrowException extends Exception {
 	}
 
 	private String call() {
-		return "redirect:finalPage"; 
+		return "redirect:400"; 
 		
 	}
 

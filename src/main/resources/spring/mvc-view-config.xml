@@ -14,27 +14,59 @@
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
      http://www.springframework.org/schema/mvc
     http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
-      
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
-        <property name="order" value="2" />
-    </bean>
-    <import resource="DataSource.xml" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+	<import resource="DataSource.xml" />
 	<import resource="HibernateSessionFactory.xml" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-<!--  <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>   -->
-<!--      To enable @RequestMapping process on method level   -->
-<!--    <bean class="net.xin.web.packages.framework.AnnotationMethodExceptionHandlerAdapter"/>   -->
-   
-   
+	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/> -->
+	<!-- To enable @RequestMapping process on method level -->
+	<!-- <bean class="net.xin.web.packages.framework.AnnotationMethodExceptionHandlerAdapter"/> -->
+
+
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> -->
+	<!-- <property name="basename" value="classpath:messages"/> -->
+	<!-- <property name="defaultEncoding" value="UTF-8"/> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="cookieResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"> -->
+	<!-- <property name="defaultLocale" value="en"/> -->
+	<!-- <property name="cookieName" value="my-locale-cookie"/> -->
+	<!-- <property name="cookieMaxAge" value="3600"/> -->
+	<!-- </bean> -->
+
+	<!-- <mvc:interceptors> -->
+	<!-- <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> -->
+	<!-- <property name="paramName" value="lang"/> -->
+	<!-- </bean> -->
+	<!-- </mvc:interceptors> -->
+
+
+	<!-- <bean id="messageSource" -->
+	<!-- class="com.mypackage.core.src.UnderDirectoryReloadableResourceBundleMessageSource"> -->
+	<!-- <property name="defaultEncoding" value="utf-8" /> -->
+	<!-- <property name="workingDirectory" value="/WEB-INF/locale" /> -->
+	<!-- <property name="cacheSeconds" value="3" /> -->
+	<!-- <property name="fallbackToSystemLocale" value="false" /> -->
+	<!-- </bean> -->
+
+
+	<!-- The bean id must be messageSource otherwise an Exception maybe occurred 
+		during execution. -->
+	
+
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-     
-    
+
+
+
 </beans>

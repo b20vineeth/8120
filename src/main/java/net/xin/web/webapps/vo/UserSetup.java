@@ -46,7 +46,8 @@ public class UserSetup {
 	@Column(name = "last_name", length=120)
 	private String lastname;
 
-
+	@Column(name = "password", length=120)
+	private String password;
 
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -81,6 +82,12 @@ public class UserSetup {
 
 
 
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Integer getMenuId() {
 		return menuId;
 	}
